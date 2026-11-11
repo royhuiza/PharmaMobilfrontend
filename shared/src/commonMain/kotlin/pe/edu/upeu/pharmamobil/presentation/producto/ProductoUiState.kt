@@ -1,0 +1,55 @@
+﻿
+package pe.edu.upeu.pharmamobil.presentation.producto
+
+data class ProductoUiState(
+    val fase: Fase = Fase.Cargando,
+    val formulario: FormularioProducto = FormularioProducto(),
+    val registrando: Boolean = false,
+    val mensajeExito: String? = null,
+
+    // Categorías
+    val categorias: List<CategoriaUi> = emptyList(),
+    val cargandoCategorias: Boolean = false,
+    val errorCategorias: String? = null,
+
+    // Edición de productos
+    val productoEditandoId: Long? = null,
+    val actualizando: Boolean = false,
+
+    // Eliminación de productos
+    val productoPendienteEliminarId: Long? = null,
+    val eliminandoId: Long? = null,
+
+    // Mensajes de operaciones
+    val mensajeError: String? = null,
+
+// Estado de sincronización
+    val sincronizacion: SincronizacionUiState = SincronizacionUiState()
+) {
+    sealed interface Fase {
+        data object Cargando : Fase
+        data object SinProductos : Fase
+        data class ConProductos(
+            val productos: List<ProductoUi>
+        ) : Fase
+        data class Error(
+            val mensaje: String
+        ) : Fase
+    }
+}
+
+data class CategoriaUi(
+    val id: Long,
+    val nombre: String
+)
+
+data class FormularioProducto(
+    val nombre: String = "",
+    val precio: String = "",
+    val stock: String = "",
+    val categoriaId: Long? = null,
+    val nombreError: String? = null,
+    val precioError: String? = null,
+    val stockError: String? = null,
+    val categoriaError: String? = null
+)
