@@ -20,3 +20,13 @@ node_modules/
 
 *.bak
 respaldo_antes_flow.patch
+
+# Configuracion privada de firma y servicios externos
+keystore.properties
+*.jks
+*.keystore
+**/google-services.json
+**/GoogleService-Info.plist
+.env
+.env.*
+!.env.example
